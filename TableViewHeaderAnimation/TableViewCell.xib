@@ -50,7 +50,7 @@
             <connections>
                 <outlet property="ImgView" destination="Xps-UK-GX4" id="TAf-ai-xfe"/>
             </connections>
-            <point key="canvasLocation" x="-18" y="-9"/>
+            <point key="canvasLocation" x="-96" y="-45"/>
         </tableViewCell>
     </objects>
     <resources>
