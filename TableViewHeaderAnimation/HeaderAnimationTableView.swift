@@ -28,15 +28,13 @@ class HeaderAnimationTableView: UITableView,UITableViewDelegate {
         didSet {
             
             let view = UIView.init(frame: CGRect.init(x:0, y:0, width:self.frame.width, height:settingInfo.headerViewActualHeight))
-            view.alpha = 0
+            view.alpha = 0;
             self.tableHeaderView = view
-            
             originWidth = topView?.frame.width
-            topView?.frame = CGRect.init(x:0, y:-settingInfo.headerViewHiddenHeight, width:originWidth, height:settingInfo.headerViewHiddenHeight * 2 + settingInfo.headerViewActualHeight)
+            topView?.frame = CGRect.init(x:0, y:0, width:originWidth, height:settingInfo.headerViewActualHeight)
             originHeight = topView?.frame.height
-            
+            settingInfo.headerViewActualHeight = settingInfo.headerViewActualHeight
             self.insertSubview(topView!, at: 0)
-            settingInfo.headerViewActualHeight = originHeight - settingInfo.headerViewHiddenHeight*2.0
         }
     }
     
@@ -44,18 +42,15 @@ class HeaderAnimationTableView: UITableView,UITableViewDelegate {
      *  页面设置信息
      */
     struct SwipAnimationViewInfo {
-        /// 上方headerView上下隐藏部分高度
-        var headerViewHiddenHeight:CGFloat = 40
-        
         /// 上方headerView的露出的实际显示高度
-        var headerViewActualHeight:CGFloat = 60
+        var headerViewActualHeight : CGFloat = 200
         
         /// 上方headerView随滚动旋转的最大角度 (0 ~ 90度)(对应值为0 ~ 1)
-        var headerViewRotateMaxRadious:Double = M_PI_2
+        var headerViewRotateMaxRadious:Double = Double.pi / 2;
         
         
         /// 上部页面跟随下部页面的动画方式
-        var followAnimationType:TopViewAnimationType = .HoldAndStretch
+        var followAnimationType:TopViewAnimationType = .Follow
         
         var stretchType:StretchType = .StretchSameRate
     }
@@ -105,6 +100,15 @@ class HeaderAnimationTableView: UITableView,UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        self.topView?.removeFromSuperview();
+        if settingInfo.followAnimationType == .FollowAndFold {
+            self.backgroundView = UIView.init();
+            self.backgroundView?.insertSubview(topView!, at: 0)
+        } else {
+            self.insertSubview(topView!, at: 0)
+        }
+        
         switch settingInfo.followAnimationType {
         case .Follow : self.headerAnimationFollow(contentOffSetY: scrollView.contentOffset.y)
         case .Hold : self.headerAnimationHold(contentOffSetY: scrollView.contentOffset.y)
@@ -123,16 +127,16 @@ class HeaderAnimationTableView: UITableView,UITableViewDelegate {
     
     // 不同的animationType作不同的动画处理
     func headerAnimationFollow(contentOffSetY:CGFloat) {
-        if contentOffSetY <= 0 && contentOffSetY >= -settingInfo.headerViewHiddenHeight * 2.0 {
-            topView?.frame = CGRect.init(x:0, y:-settingInfo.headerViewHiddenHeight + contentOffSetY / 2.0, width:self.originWidth, height:self.originHeight)
+        if contentOffSetY <= 0 {
+            topView?.frame = CGRect.init(x:0, y: contentOffSetY / 2.0, width:self.originWidth, height:self.originHeight)
             
         }
     }
     
     func headerAnimationFollowAndStretch(contentOffSetY:CGFloat) {
         self.headerAnimationFollow(contentOffSetY: contentOffSetY)
-        if contentOffSetY <= -settingInfo.headerViewHiddenHeight * 2.0  {
-            let actualOffSetY = -contentOffSetY - settingInfo.headerViewHiddenHeight * 2
+        if contentOffSetY <= 0  {
+            let actualOffSetY = -contentOffSetY
             var actualOffSetX:CGFloat = 0
             if settingInfo.stretchType == .StretchEqual {
                 actualOffSetX = 0
@@ -144,25 +148,26 @@ class HeaderAnimationTableView: UITableView,UITableViewDelegate {
     }
     
     func headerAnimationHold(contentOffSetY:CGFloat) {
-        if contentOffSetY < settingInfo.headerViewActualHeight && contentOffSetY > 0 {
-            topView?.frame = CGRect.init(x:0, y:-settingInfo.headerViewHiddenHeight + contentOffSetY, width:topView!.frame.width, height:(topView?.frame.height)!)
-        } else if contentOffSetY <= 0 && contentOffSetY >= -settingInfo.headerViewHiddenHeight * 2.0 {
-            topView?.frame = CGRect.init(x:0, y:-settingInfo.headerViewHiddenHeight + contentOffSetY / 2.0, width:self.originWidth, height:self.originHeight)
+        if contentOffSetY > 0 {
+            topView?.frame = CGRect.init(x:0, y:contentOffSetY, width:topView!.frame.width, height:(topView?.frame.height)!)
+        } else if contentOffSetY <= 0 {
+            topView?.frame = CGRect.init(x:0, y:0, width:self.originWidth, height:self.originHeight)
         }
     }
     
     func headerAnimationFold(contentOffSetY:CGFloat) {
-        if contentOffSetY < settingInfo.headerViewActualHeight && contentOffSetY > 0 {
-            topView?.frame = CGRect.init(x:0, y:-settingInfo.headerViewHiddenHeight + contentOffSetY * 0.5, width:topView!.frame.width, height:(topView?.frame.height)!)
-        } else if contentOffSetY <= 0 && contentOffSetY >= -settingInfo.headerViewHiddenHeight * 2.0 {
-            topView?.frame = CGRect.init(x:0, y:-settingInfo.headerViewHiddenHeight + contentOffSetY / 2.0, width:self.originWidth, height:self.originHeight)
+        
+        if contentOffSetY > 0 && contentOffSetY < self.settingInfo.headerViewActualHeight {
+            topView?.frame = CGRect.init(x:0, y:-contentOffSetY * 0.5, width:topView!.frame.width, height:(topView?.frame.height)!)
+        } else if contentOffSetY <= 0 {
+            topView?.frame = CGRect.init(x:0, y:-contentOffSetY, width:self.originWidth, height:self.originHeight)
         }
     }
     
     func headerAnimationHoldAndStretch(contentOffSetY:CGFloat) {
         self.headerAnimationHold(contentOffSetY: contentOffSetY)
-        if contentOffSetY <= -settingInfo.headerViewHiddenHeight * 2.0 {
-            let actualOffSetY = -contentOffSetY - settingInfo.headerViewHiddenHeight * 2
+        if contentOffSetY <= 0 {
+            let actualOffSetY = -contentOffSetY
             var actualOffSetX:CGFloat = 0
             if settingInfo.stretchType == .StretchEqual {
                 actualOffSetX = 0

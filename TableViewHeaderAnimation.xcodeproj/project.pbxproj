@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A15C5821EC6CE3400BEE015 /* hello.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9A15C5811EC6CE3400BEE015 /* hello.gif */; };
 		9A1F95DA1EC5B741008617DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F95D91EC5B741008617DE /* AppDelegate.swift */; };
 		9A1F95E11EC5B741008617DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1F95E01EC5B741008617DE /* Assets.xcassets */; };
 		9A1F95E41EC5B741008617DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A1F95E21EC5B741008617DE /* LaunchScreen.storyboard */; };
@@ -18,7 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9A15C5811EC6CE3400BEE015 /* hello.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = hello.gif; sourceTree = "<group>"; };
 		9A1F95D61EC5B741008617DE /* TableViewHeaderAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewHeaderAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1F95D91EC5B741008617DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A1F95E01EC5B741008617DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,7 +65,6 @@
 				9A92B9F31EC6B90100BA7EF4 /* TableViewCell.xib */,
 				9A1F95E01EC5B741008617DE /* Assets.xcassets */,
 				9A1F95E21EC5B741008617DE /* LaunchScreen.storyboard */,
-				9A15C5811EC6CE3400BEE015 /* hello.gif */,
 				9A1F95E51EC5B741008617DE /* Info.plist */,
 			);
 			path = TableViewHeaderAnimation;
@@ -105,7 +102,7 @@
 				TargetAttributes = {
 					9A1F95D51EC5B741008617DE = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 356JV765LM;
+						DevelopmentTeam = N29NG87DU4;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -134,7 +131,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A1F95E41EC5B741008617DE /* LaunchScreen.storyboard in Resources */,
-				9A15C5821EC6CE3400BEE015 /* hello.gif in Resources */,
 				9A92B9F51EC6B90100BA7EF4 /* TableViewCell.xib in Resources */,
 				9A1F95E11EC5B741008617DE /* Assets.xcassets in Resources */,
 			);
@@ -265,7 +261,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 356JV765LM;
+				DEVELOPMENT_TEAM = N29NG87DU4;
 				INFOPLIST_FILE = TableViewHeaderAnimation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -279,7 +275,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 356JV765LM;
+				DEVELOPMENT_TEAM = N29NG87DU4;
 				INFOPLIST_FILE = TableViewHeaderAnimation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
