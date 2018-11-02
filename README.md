@@ -4,3 +4,4 @@ Most tableViewHeader animation has been include in this demo, you can use it inh
 
 ![image](https://github.com/xlsd/SDTableViewHeaderAnimation/blob/master/TableViewHeaderAnimation/WeChat.gif)
 
+![image](https://github.com/xlsd/SDTableViewHeaderAnimation/blob/master/TableViewHeaderAnimation/IMG_2547.PNG)
