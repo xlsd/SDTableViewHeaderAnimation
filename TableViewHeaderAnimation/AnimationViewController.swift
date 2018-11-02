@@ -46,7 +46,7 @@ class AnimationViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Action", style: UIBarButtonItemStyle.plain, target: self, action: #selector(action))
     }
 
-    func action() {
+    @objc func action() {
          let alertVc = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
         // 下拉跟随
         let followAction = UIAlertAction.init(title: "Follow", style: .default) { (UIAlertAction) in
@@ -89,6 +89,9 @@ class AnimationViewController: UIViewController,UITableViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify, for: indexPath)
         return  cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
