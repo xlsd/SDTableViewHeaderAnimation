@@ -70,7 +70,7 @@ class AnimationViewController: UIViewController,UITableViewDelegate,UITableViewD
         alertVc.addAction(holdAndStretchAction)
         
         // 同时滚动但有折叠效果
-        let holdAndFoldAction = UIAlertAction.init(title: "HoldAndFold", style: .default) { (UIAlertAction) in
+        let holdAndFoldAction = UIAlertAction.init(title: "FollowAndFold", style: .default) { (UIAlertAction) in
             self.followAndFoldAction();
         }
         alertVc.addAction(holdAndFoldAction)

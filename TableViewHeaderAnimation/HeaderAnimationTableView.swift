@@ -24,6 +24,8 @@ class HeaderAnimationTableView: UITableView,UITableViewDelegate {
     /// 先设置settingInfo后再设置topView
     var settingInfo:SwipAnimationViewInfo = SwipAnimationViewInfo()
     
+    var coverView : UIView?
+    
     var topView:UIView? {
         didSet {
             
@@ -35,6 +37,13 @@ class HeaderAnimationTableView: UITableView,UITableViewDelegate {
             originHeight = topView?.frame.height
             settingInfo.headerViewActualHeight = settingInfo.headerViewActualHeight
             self.insertSubview(topView!, at: 0)
+            
+            let coverView = UIView()
+            coverView.backgroundColor = UIColor.black
+            coverView.alpha = 0
+            coverView.frame = (topView?.frame)!
+            self.coverView = coverView
+            topView?.addSubview(self.coverView!)
         }
     }
     
@@ -105,8 +114,11 @@ class HeaderAnimationTableView: UITableView,UITableViewDelegate {
         if settingInfo.followAnimationType == .FollowAndFold {
             self.backgroundView = UIView.init();
             self.backgroundView?.insertSubview(topView!, at: 0)
+            // 遮罩alpha改变
+            self.coverView?.alpha = scrollView.contentOffset.y / (self.settingInfo.headerViewActualHeight * 2)
         } else {
             self.insertSubview(topView!, at: 0)
+            self.coverView?.alpha = 0;
         }
         
         switch settingInfo.followAnimationType {
